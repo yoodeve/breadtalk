@@ -1,0 +1,33 @@
+.nav {
+    background: none;
+    color: black;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; z-index: 99;
+    padding-top: 15px;
+    top: 0;
+    opacity: 0.8;
+    backdrop-filter: blur(30px);
+
+}
+
+.nav_ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav_li {
+    display: inline-block;
+    margin-left: 16px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.nav_link{
+    text-decoration : none;
+    color: black;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
