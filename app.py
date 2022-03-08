@@ -24,8 +24,15 @@ def home():
 
 @app.route('/login')
 def login():
-    msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
+    return render_template('login.html')
+
+@app.route('/writing')
+def writing():
+    return render_template('write.html')
+
+@app.route('/reg')
+def register():
+    return render_template('register.html')
 
 @app.route('/login', methods=["POST"])
 def signin(SECRET_KEY=None):
@@ -47,11 +54,6 @@ def signin(SECRET_KEY=None):
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-@app.route('/reg')
-def register():
-    msg = request.args.get("msg")
-    return render_template('register.html', msg=msg)
 
 @app.route('/reg/checkIdDup', methods=["POST"])
 def checkiddup():
