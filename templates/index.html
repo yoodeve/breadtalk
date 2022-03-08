@@ -77,6 +77,23 @@
             margin-left: 15px;
         }
 
+        .mycards {
+            margin: 20px auto 0x auto;
+            width: 95%
+            max-width: 1200px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: stretch;
+
+            flex-wrap: wrap;
+        }
+
+        .card {
+            margin: 20px 20px 20px 20px;
+        }
+
     </style>
     <script>
 
@@ -132,48 +149,146 @@
 
 <body>
 
-<!--네비게이션 바-->
-<header class="nav">
-    <a class="nav_link" href="/"><h1>빵수다</h1></a>
-    <nav>
-        <ul class="nav_ul">
-            <li class="nav_li">
-                <a class="nav_link" href="작성페이지 url">리뷰작성</a>
-            </li>
-            <li class="nav_li">
-                <a class="nav_link" href="로그인페이지 url">로그인</a>
-            </li>
-            <li class="nav_li">
-                <a class="nav_link" href="회원가입페이지 url">회원가입</a>
-            </li>
-        </ul>
-    </nav>
-</header>
-
-<div class="mytitle">
-    <!--   <h1>검색이나 메인 문구 ?</h1>-->
-</div>
-
-
-<div class="mycards">
-    <div class="select">
-        <div class="select_box">
-            <select class="select_box_si" id="inlineFormCustomSelect">
-                <option selected>지역선택</option>
-                <option value="1">서울</option>
-                <option value="2">경기</option>
-                <option value="3">부산</option>
-            </select>
+    <!--네비게이션 바-->
+    <header class="nav">
+        <div class="nav_link" onclick="window.location.href = '/'">
+            <img src="static/mylogo.png" alt="">
         </div>
-        <div class="search_box">
-            <input type="text" name="keyword" id="keyword" {% if keyword !=None %} value={{keyword}} {% endif %}>
-            <input type="button" value="검색" onclick="search()">
-        </div>
+        <nav>
+            <ul class="nav_ul">
+                <li class="nav_li">
+                    <a class="nav_link" href="작성페이지 url">리뷰작성</a>
+                </li>
+                <li class="nav_li">
+                    <a class="nav_link" href="로그인페이지 url">로그인</a>
+                </li>
+                <li class="nav_li">
+                    <a class="nav_link" href="회원가입페이지 url">회원가입</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="mytitle">
+        <!--   <h1>검색이나 메인 문구 ?</h1>-->
     </div>
 
-    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+
+    <div class="mycards">
+        <div class="select">
+            <div class="select_box">
+                <select class="select_box_si" id="inlineFormCustomSelect">
+                    <option selected>지역선택</option>
+                    <option value="1">서울</option>
+                    <option value="2">경기</option>
+                    <option value="3">부산</option>
+                </select>
+            </div>
+            <div class="search_box">
+                <input type="text" name="keyword" id="keyword" {% if keyword !=None %} value={{keyword}} {% endif %}>
+                <input type="button" value="검색" onclick="search()">
+            </div>
+        </div>
+        <div class="mycards">
+            <div class="card" style="width: 18rem;">
+                <img src="static/example.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">빵집 이름</h5>
+                    <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">대표빵 : 소보로</li>
+                    <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                    <li class="list-group-item">별점 : ⭐⭐⭐</li>
+                </ul>
+                <div class="card-body" style="display: flex; justify-content: space-around;">
+                    <h8>작성자 : 닉네임</h8>
+                    <h8>2017-12-21 22:11:33</h8>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/example.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">빵집 이름</h5>
+                    <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">대표빵 : 소보로</li>
+                    <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                    <li class="list-group-item">별점 : ⭐⭐⭐</li>
+                </ul>
+                <div class="card-body" style="display: flex; justify-content: space-around;">
+                    <h8>작성자 : 닉네임</h8>
+                    <h8>2017-12-21 22:11:33</h8>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/example.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">빵집 이름</h5>
+                    <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">대표빵 : 소보로</li>
+                    <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                    <li class="list-group-item">별점 : ⭐⭐⭐</li>
+                </ul>
+                <div class="card-body" style="display: flex; justify-content: space-around;">
+                    <h8>작성자 : 닉네임</h8>
+                    <h8>2017-12-21 22:11:33</h8>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/example.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">빵집 이름</h5>
+                    <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">대표빵 : 소보로</li>
+                    <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                    <li class="list-group-item">별점 : ⭐⭐⭐</li>
+                </ul>
+                <div class="card-body" style="display: flex; justify-content: space-around;">
+                    <h8>작성자 : 닉네임</h8>
+                    <h8>2017-12-21 22:11:33</h8>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/example.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">빵집 이름</h5>
+                    <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">대표빵 : 소보로</li>
+                    <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                    <li class="list-group-item">별점 : ⭐⭐⭐</li>
+                </ul>
+                <div class="card-body" style="display: flex; justify-content: space-around;">
+                    <h8>작성자 : 닉네임</h8>
+                    <h8>2017-12-21 22:11:33</h8>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/example.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">빵집 이름</h5>
+                    <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">대표빵 : 소보로</li>
+                    <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                    <li class="list-group-item">별점 : ⭐⭐⭐</li>
+                </ul>
+                <div class="card-body" style="display: flex; justify-content: space-around;">
+                    <h8>작성자 : 닉네임</h8>
+                    <h8>2017-12-21 22:11:33</h8>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
-</body>
+    </body>
 
 </html>
