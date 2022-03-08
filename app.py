@@ -22,7 +22,7 @@ def login():
     return render_template('login.html', msg=msg)
 
 @app.route('/login/success', methods=["POST"])
-def signin(SECRET_KEY=None):
+def signin():
     # 로그인
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
