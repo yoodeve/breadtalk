@@ -1,7 +1,3 @@
-from flask import Flask, render_template, request, jsonify
-app = Flask(__name__)
-from datetime import datetime
-
 from pymongo import MongoClient
 client = MongoClient('mongodb+srv://gibeks:1234@Cluster0.htlw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 db = client.dbsparta
@@ -10,12 +6,11 @@ import jwt
 import datetime
 import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
+app = Flask(__name__)
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 
 SECRET_KEY = 'bread'
-
-app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -23,18 +18,11 @@ def home():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    msg = request.args.get("msg")
+    return render_template('login.html', msg=msg)
 
-@app.route('/writing')
-def writing():
-    return render_template('write.html')
-
-@app.route('/reg')
-def register():
-    return render_template('register.html')
-
-@app.route('/login', methods=["POST"])
-def signin(SECRET_KEY=None):
+@app.route('/login/success', methods=["POST"])
+def signin():
     # 로그인
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
@@ -53,6 +41,11 @@ def signin(SECRET_KEY=None):
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+@app.route('/reg')
+def register():
+    msg = request.args.get("msg")
+    return render_template('register.html', msg=msg)
 
 @app.route('/reg/checkIdDup', methods=["POST"])
 def checkiddup():
