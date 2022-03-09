@@ -116,5 +116,35 @@ def save_review():
 
     return jsonify({'msg': '등록 완료!!'})
 
+
+# 로그인 정보를 메인페이지로 전달
+@app.route('/')
+def home_test():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        busers_info = db.busers.find_one({"id": payload["id"]})
+        reviews = list(db.review.find({}))
+        reviews.reverse()
+        for review in reviews:
+            review["review_id"] = str(review["_id"])
+            print(review)
+
+        return render_template('index.html', busers_info=busers_info, review=review)
+
+    except jwt.ExpiredSignatureError:
+       return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+
+# 마이페이지로 정보전달
+@app.route('/mypage')
+def mypage():
+    token_receive =request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    busers_info = db.busers.find_one({"id": payload["id"]})
+    nick = busers_info['nick']
+
+    reviews = list(db.review.find({"nick":nick}))
+    return render_template('mypage.html', nick=nick, reviews=reviews)
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5050, debug=True)
