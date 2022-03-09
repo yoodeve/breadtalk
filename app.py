@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 client = MongoClient('mongodb+srv://gibeks:1234@Cluster0.htlw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 db = client.dbsparta
-
+# css수정 커밋
 import jwt
 import datetime
 import hashlib
@@ -72,6 +72,10 @@ def join():
     }
     db.busers.insert_one(doc)
     return jsonify({'result': 'success'})
+
+@app.route('/api/writing')
+def write():
+    return render_template('write.html')
 
 @app.route("/api/writing", methods=["POST"])
 def save_review():
