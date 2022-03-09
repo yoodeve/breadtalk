@@ -98,11 +98,6 @@
             border-radius: 5px;
 >>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
         }
-        .headers {
-            background-color: transparent;
-            border: transparent;
-            font-size: 18px;
-        }
     </style>
     <script>
         function save_review() {
@@ -262,11 +257,17 @@
         <img src="../static/mylogo.png" alt="">
     </div>
     <nav>
-        <div>
-            <button class="headers" onclick="location.href='api/writing'">리뷰작성</button>
-            <button class="headers" onclick="location.href='/login'">로그인</button>
-            <button class="headers" onclick="location.href='/reg'">회원가입</button>
-        </div>
+        <ul class="nav_ul">
+            <li class="nav_li">
+                <a class="nav_link" href="/writing">리뷰작성</a>
+            </li>
+            <li class="nav_li">
+                <a class="nav_link" href="/login">로그인</a>
+            </li>
+            <li class="nav_li">
+                <a class="nav_link" href="/reg">회원가입</a>
+            </li>
+        </ul>
     </nav>
 </header>
 <div class="mypost" id="post-box">
