@@ -14,16 +14,19 @@ SECRET_KEY = 'bread'
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    title = "빵수다"
+    return render_template('index.html', title=title)
 
 @app.route('/login')
 def login():
+    title = "빵수다 | 로그인"
     msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
+    return render_template('login.html', msg=msg, title=title)
 
 @app.route('/writing')
 def write():
-    return render_template('write.html')
+    title = "빵수다 | 글작성"
+    return render_template('write.html', title=title)
 
 @app.route('/login/success', methods=["POST"])
 def signin():
@@ -49,7 +52,8 @@ def signin():
 @app.route('/reg')
 def register():
     msg = request.args.get("msg")
-    return render_template('register.html', msg=msg)
+    title = "빵수다 | 회원가입"
+    return render_template('register.html', msg=msg, title=title)
 
 @app.route('/reg/checkIdDup', methods=["POST"])
 def checkiddup():
@@ -145,6 +149,7 @@ def mypage():
 
     reviews = list(db.review.find({"nick":nick}))
     return render_template('mypage.html', nick=nick, reviews=reviews)
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
