@@ -26,6 +26,7 @@ def signin():
     # 로그인
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
+    print(pw_receive)
 
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
     result = db.busers.find_one({'id': id_receive, 'pw': pw_hash})
@@ -35,7 +36,7 @@ def signin():
             'id': id_receive,
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
