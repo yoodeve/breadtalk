@@ -1,73 +1,90 @@
-{% extends "base.html"  %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-<style>
-    .mypost {
-        width: 95%;
-        max-width: 500px;
-        margin: 20px auto 0px auto;
-        padding: 20px;
-        box-shadow: 0px 0px 3px 0px gray;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Style 관련 -->
+    <link href='{{ url_for("static", filename="mystyle.css") }}' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
-    }
+    <!-- Script 관련 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
-    .h1 {
-        text-align: center;
-        color: #534340;
-    }
+    <title> 리뷰작성 | 빵수다 </title>
+    <style>
 
-    .citySelect {
-        width: 380px;
-        height: 100%;
-    }
+        .mypost {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px gray;
 
-    .size {
-        width: 80px;
-        text-align: center;
-    }
+        }
 
-    .input-group-text {
-        width: 95%;
-        text-align: center;
-    }
+        .h1 {
+            text-align: center;
+            color: #534340;
+        }
 
-    .mybtns {
-        align-content: center;
-        width: 95%;
-        max-width: 500px;
-        padding: 20px;
-        margin: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .btn {
-        width: 80px;
-        height: 30px;
-        border: 0px;
-        background-color: #AD8B73;
-        outline: none;
-        float: right;
-        color: #FFFBE9;
-        margin-left: 5px;
-    }
-    .btn2 {
-        width: 80px;
-        height: 100%;
-        background-color: #FFFBE9;
-        outline: none;
-        float: right;
-        color: #AD8B73;
-        border: #AD8B73 solid 1px;
-        border-radius: 5px;
-    }
-    .headers {
-        background-color: transparent;
-        border: transparent;
-        font-size: 18px;
-    }
-</style>
-<script>
+        .citySelect {
+            width: 380px;
+            height: 100%;
+        }
+
+        .size {
+            width: 80px;
+            text-align: center;
+        }
+
+        .input-group-text {
+            width: 95%;
+            text-align: center;
+        }
+
+        .mybtns {
+            align-content: center;
+            width: 95%;
+            max-width: 500px;
+            padding: 20px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn {
+            width: 80px;
+            height: 30px;
+            border: 0px;
+            background-color: #AD8B73;
+            outline: none;
+            float: right;
+            color: #FFFBE9;
+            margin-left: 5px;
+        }
+        .btn2 {
+            width: 80px;
+            height: 100%;
+            background-color: #FFFBE9;
+            outline: none;
+            float: right;
+            color: #AD8B73;
+            border: #AD8B73 solid 1px;
+            border-radius: 5px;
+        }
+        .headers {
+            background-color: transparent;
+            border: transparent;
+            font-size: 18px;
+        }
+    </style>
+    <script>
         function save_review() {
             let store = $('#store').val();
             let city = $('#city').val();
@@ -75,7 +92,6 @@
             let bread_name = $('#bread_name').val();
             let comment = $('#comment').val();
             let star = $('#star').val();
-
 
             let file = $('#file')[0].files[0]
             let form_data = new FormData()
@@ -90,34 +106,33 @@
 
             $.ajax({
                 type: "POST",
-                url: "/api/writing",
+                url: "/writing/save",
                 data: form_data,
                 cache: false,
                 contentType: false,
                 processData: false,
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.reload()
+                    window.location.replace("/")
                 }
             });
         }
 
     </script>
-
-<!--네비게이션 바-->
+</head>
+<body>
 <header class="nav">
     <div class="nav_link" onclick="window.location.href = '/'">
-        <img src="static/mylogo.png" alt="">
+        <img src="../static/mylogo.png" alt="">
     </div>
     <nav>
         <div>
-            <button onclick="location.href='/writing'" class="headers">리뷰작성</button>
-            <button class='btn-login' onclick="location.href='/login'" class="headers">로그인</button>
-            <button class="btn-mypg" onclick="location.href='/reg'">회원가입</button>
+            <button class="headers" onclick="location.href='api/writing'">리뷰작성</button>
+            <button class="headers" onclick="location.href='/login'">로그인</button>
+            <button class="headers" onclick="location.href='/reg'">회원가입</button>
         </div>
     </nav>
 </header>
-<!--작성하기 창-->
 <div class="mypost" id="post-box">
     <p>
     <h1 class="h1">Review</h1>
@@ -211,5 +226,9 @@
         <button onclick="save_review()" type="button" class="btn">Submit</button>
     </div>
 </div>
+</div>
 
-{% endblock %}
+
+</div>
+</body>
+</html>

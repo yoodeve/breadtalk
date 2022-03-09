@@ -1,10 +1,28 @@
-{% extends "base.html"  %}
-{% block content %}
+<!doctype html>
+<html lang="en">
 
-<style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Style 관련 -->
+    <link href='{{ url_for("static", filename="mystyle.css") }}' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- Script 관련 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>빵수다</title>
+
+    <style>
         * {
-            color:#534340;
+            color: #534340;
         }
+
         .mytitle {
             width: 100%;
             height: 400px;
@@ -36,6 +54,15 @@
             flex-wrap: wrap;
         }
 
+        /*.mypost {*/
+        /*    width: 95%;*/
+        /*    max-width: 500px;*/
+        /*    margin: 20px auto 0px auto;*/
+        /*    padding: 20px;*/
+        /*    box-shadow: 0px 0px 3px 0px gray;*/
+
+        /*    display: none;*/
+        /*}*/
 
         .select_box {
             margin-bottom: 20px;
@@ -83,7 +110,158 @@
             border-radius: 5px;
         }
 
+        .headers {
+            background-color: transparent;
+            border: transparent;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: transparent;
+        }
+
+        .btn-mypg {
+            background-color: transparent;
+            border: transparent;
+        }
     </style>
+    <script>
+        $(document).ready(function () {
+            checkCookie();
+            listing();
+        });
+
+        function checkCookie() {
+            let cookieArr = document.cookie.split(";");
+            try {
+                for (let i = 0; i < cookieArr.length; i++) {
+                    let logIn = cookieArr[i].match('mytoken')
+
+                    if (logIn) { // 로그인 상태 //
+                        alert("로그인 상태입니다")
+                        let loginBtn = document.querySelector(".btn-login")
+                        loginBtn.innerHTML = "LOGOUT";
+                        loginBtn.addEventListener("click", logOut);
+
+                        let mypgBtn = document.querySelector(".btn-mypg")
+                        mypgBtn.innerHTML = "MyPage";
+                        mypgBtn.addEventListener("click", MyPage);
+
+                    } else {
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        function logOut() {
+            document.cookie = "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "/"
+        }
+
+        function MyPage() {
+            window.location.href = "/reg"
+        }
+
+
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/read',
+                data: {},
+                success: function (response) {
+                    let rows = response['reviews']
+                    for (let i = 0; i < rows.length; i++) {
+                        let store = rows[i]['store']
+                        let city = rows[i]['city']
+                        let city2 = rows[i]['city2']
+                        let bread_name = rows[i]['bread_name']
+                        let comment = rows[i]['comment']
+                        let star = rows[i]['star']
+                        let file = rows[i]['file']
+
+                        let star_image = '⭐'.repeat(star)
+
+                        let today = new Date();
+                        let year = today.getFullYear();
+                        let month = ('0' + (today.getMonth() + 1)).slice(-2);
+                        let day = ('0' + today.getDate()).slice(-2);
+                        let dateString = year + '-' + month + '-' + day;
+
+                        console.log(store, city, city2, bread_name, comment, file, star_image)
+                        let temp_html = ` <div class="card" style="width: 18rem;">
+                                                <img src="../static/${file}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${store}</h5>
+                                                    <p class="card-text">${comment}</p>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">${bread_name}</li>
+                                                    <li class="list-group-item">${city}${city2}</li>
+                                                    <li class="list-group-item">${star_image}</li>
+                                                </ul>
+                                                <div class="card-body" style="display: flex; justify-content: space-around;">
+                                                    <h8>작성자 : 닉네임</h8>
+                                                    <h8>${dateString}</h8>
+                                                </div>
+                                            </div>`
+                        $('#cards-box').append(temp_html)
+                    }
+                }
+            })
+        }
+
+
+        // $(document).ready(function () {
+        //     listing();
+        // });
+
+
+        // 좋아요 업데이트 함수
+
+        // function toggle_like(post_id, type) {
+        //     console.log(post_id, type)
+        //     let $a_like = $(`#${post_id} a[aria-label='heart']`)
+        //     let $i_like = $a_like.find("i")
+        //     if ($i_like.hasClass("fa-heart")) {
+        //         $.ajax({
+        //             type: "POST",
+        //             url: "/update_like",
+        //             data: {
+        //                 post_id_give: post_id,
+        //                 type_give: type,
+        //                 action_give: "unlike"
+        //             },
+        //             success: function (response) {
+        //                 console.log("unlike")
+        //                 $i_like.addClass("fa-heart-o").removeClass("fa-heart")
+        //                 $a_like.find("span.like-num").text(response["count"])
+        //             }
+        //         })
+        //     } else {
+        //         $.ajax({
+        //             type: "POST",
+        //             url: "/update_like",
+        //             data: {
+        //                 post_id_give: post_id,
+        //                 type_give: type,
+        //                 action_give: "like"
+        //             },
+        //             success: function (response) {
+        //                 console.log("like")
+        //                 $i_like.addClass("fa-heart").removeClass("fa-heart-o")
+        //                 $a_like.find("span.like-num").text(response["count"])
+        //             }
+        //         })
+        //
+        //     }
+        // }
+
+
+    </script>
+</head>
 
 <body>
 <!--네비게이션 바-->
@@ -94,16 +272,28 @@
     <nav>
         <div>
             <button onclick="location.href='/writing'" class="headers">리뷰작성</button>
-            <button class='btn-login headers' onclick="location.href='/login'">로그인</button>
+            <button class='btn-login' onclick="location.href='/login'" class="headers">로그인</button>
             <button class="btn-mypg" onclick="location.href='/reg'">회원가입</button>
         </div>
+        <!--        <ul class="nav_ul">-->
+        <!--            <li class="nav_li">-->
+        <!--                <a class="nav_link" href="/api/writing">리뷰작성</a>-->
+        <!--            </li>-->
+        <!--            <li class="nav_li">-->
+        <!--                <a id="btn-join" class="nav_link" href="/login">로그인</a>-->
+        <!--            </li>-->
+        <!--            <li class="nav_li">-->
+        <!--                <a class="nav_link" href="/reg">회원가입</a>-->
+        <!--            </li>-->
+        <!--        </ul>-->
     </nav>
 </header>
 
-<!-- 빵 사진 -->
-<div class="mytitle"></div>
+<div class="mytitle">
+    <!--   <h1>검색이나 메인 문구 ?</h1>-->
+</div>
 
-<!-- 카드 박스 -->
+
 <div class="mycards">
     <div class="select">
         <div class="select_box">
@@ -119,105 +309,10 @@
             <input type="button" class="btn" value="검색" onclick="search()">
         </div>
     </div>
-    <div class="mycards">
-        <div class="card" style="width: 18rem;">
-            <img src="static/example.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">빵집 이름</h5>
-                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">대표빵 : 소보로</li>
-                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
-                <li class="list-group-item">별점 : ⭐⭐⭐</li>
-            </ul>
-            <div class="card-body" style="display: flex; justify-content: space-around;">
-                <h8>작성자 : 닉네임</h8>
-                <h8>2017-12-21 22:11:33</h8>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="static/example.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">빵집 이름</h5>
-                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">대표빵 : 소보로</li>
-                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
-                <li class="list-group-item">별점 : ⭐⭐⭐</li>
-            </ul>
-            <div class="card-body" style="display: flex; justify-content: space-around;">
-                <h8>작성자 : 닉네임</h8>
-                <h8>2017-12-21 22:11:33</h8>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="static/example.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">빵집 이름</h5>
-                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">대표빵 : 소보로</li>
-                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
-                <li class="list-group-item">별점 : ⭐⭐⭐</li>
-            </ul>
-            <div class="card-body" style="display: flex; justify-content: space-around;">
-                <h8>작성자 : 닉네임</h8>
-                <h8>2017-12-21 22:11:33</h8>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="static/example.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">빵집 이름</h5>
-                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">대표빵 : 소보로</li>
-                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
-                <li class="list-group-item">별점 : ⭐⭐⭐</li>
-            </ul>
-            <div class="card-body" style="display: flex; justify-content: space-around;">
-                <h8>작성자 : 닉네임</h8>
-                <h8>2017-12-21 22:11:33</h8>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="static/example.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">빵집 이름</h5>
-                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">대표빵 : 소보로</li>
-                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
-                <li class="list-group-item">별점 : ⭐⭐⭐</li>
-            </ul>
-            <div class="card-body" style="display: flex; justify-content: space-around;">
-                <h8>작성자 : 닉네임</h8>
-                <h8>2017-12-21 22:11:33</h8>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="static/example.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">빵집 이름</h5>
-                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">대표빵 : 소보로</li>
-                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
-                <li class="list-group-item">별점 : ⭐⭐⭐</li>
-            </ul>
-            <div class="card-body" style="display: flex; justify-content: space-around;">
-                <h8>작성자 : 닉네임</h8>
-                <h8>2017-12-21 22:11:33</h8>
-            </div>
-        </div>
+    <div class="mycards" id="cards-box">
     </div>
 
 </div>
+</body>
 
-{% endblock %}
+</html>
