@@ -50,7 +50,6 @@
             let comment = $('#comment').val();
             let star = $('#star').val();
 
-
             let file = $('#file')[0].files[0]
             let form_data = new FormData()
 
@@ -64,14 +63,14 @@
 
             $.ajax({
                 type: "POST",
-                url: "/api/writing",
+                url: "/writing/save",
                 data: form_data,
                 cache: false,
                 contentType: false,
                 processData: false,
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.reload()
+                    window.location.replace("/")
                 }
             });
         }

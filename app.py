@@ -73,7 +73,16 @@ def join():
     db.busers.insert_one(doc)
     return jsonify({'result': 'success'})
 
-@app.route("/api/writing", methods=["POST"])
+
+
+@app.route('/writing')
+def writing():
+    msg = request.args.get("msg")
+    return render_template('write.html', msg=msg)
+
+
+# 리뷰작성 저장
+@app.route('/writing/save', methods=["POST"])
 def save_review():
     store_receive = request.form['store_give']
     city_receive = request.form['city_give']
@@ -84,13 +93,13 @@ def save_review():
 
     # 파일 업로드 코드
     file = request.files["file_give"]
-
+    # 확장자 추출
     extension = file.filename.split('.')[-1]
 
+    # 현재시각 파일에 붙여주기
     today = datetime.now()
     mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
     filename = f'file-{mytime}'
-
     save_to = f'static/{filename}.{extension}'
     file.save(save_to)
 
@@ -110,7 +119,16 @@ def save_review():
 
     db.review.insert_one(doc)
 
-    return jsonify({'msg': '등록 완료!!'})
+    return jsonify({'msg': '리뷰작성 완료!'})
+
+
+# 리뷰 데이터 전달
+@app.route("/api/read", methods=["GET"])
+def review_get():
+    review_list = list(db.review.find({}, {'_id': False}))
+    return jsonify({'reviews': review_list})
+
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
