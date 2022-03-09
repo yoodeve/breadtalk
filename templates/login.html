@@ -14,11 +14,27 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <title>빵</title>
 
     <style>
+        .banner {
+            width: 100%;
+            height: 200px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/breadHeader.jpg');
+            background-position: top;
+            background-size: cover;
+
+            color: #534340;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         .h3text {
             padding-bottom: 10px;
         }
@@ -30,7 +46,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding-top: 150 px;
         }
 
         .input-group mb-3 {
@@ -61,6 +76,27 @@
         .buttons > button {
             margin-left: 5px;
             margin-right: 5px;
+        }
+
+        .btn {
+            width: 90px;
+            height: 40px;
+            border: 0px;
+            background-color: #AD8B73;
+            outline: none;
+            float: right;
+            color: #FFFBE9;
+            margin-left: 5px;
+        }
+        .btn2 {
+            width: 90px;
+            height: 40px;
+            background-color: #FFFBE9;
+            outline: none;
+            float: right;
+            color: #AD8B73;
+            border: #AD8B73 solid 1px;
+            border-radius: 5px;
         }
     </style>
     <script>
@@ -99,55 +135,56 @@
 </head>
 <body>
 <!--네비게이션 바-->
-    <header class="nav">
-        <div class="nav_link" onclick="window.location.href = '/'">
-            <img src="static/mylogo.png" alt="">
-        </div>
-        <nav>
-            <ul class="nav_ul">
-                <li class="nav_li">
-                    <a class="nav_link" href="/api/writing">리뷰작성</a>
-                </li>
-                <li class="nav_li">
-                    <a class="nav_link" href="/login">로그인</a>
-                </li>
-                <li class="nav_li">
-                    <a class="nav_link" href="/reg">회원가입</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="mytitle">
-<hr>
-<div class="bodyClass">
-    <div class="logBox">
-        <div class="h3text">
-            <h3>로그인</h3>
-        </div>
-        <div class="left"></div>
-        <p>
-        <div class="input-group mb-3">
-            <span class="input-group-text">ID</span>
-            <input type="text" id="id" class="form-control" aria-label="Sizing example input"
-                   aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text">PW</span>
-            <input type="password" id="pw" class="form-control" aria-label="Sizing example input"
-                   aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="right"></div>
-        </p>
+<header class="nav">
+    <div class="nav_link" onclick="window.location.href = '/'">
+        <img src="static/mylogo.png" alt="">
     </div>
-    <div class="buttons">
-        <a href="/reg">
-            <button type="button" class="btn btn-outline-secondary">회원가입</button>
-        </a>
-        <button type="button" class="btn btn-outline-success" onclick="login()">로그인</button>
+    <nav>
+        <ul class="nav_ul">
+            <li class="nav_li">
+                <a class="nav_link" href="/api/writing">리뷰작성</a>
+            </li>
+            <li class="nav_li">
+                <a class="nav_link" href="/login">로그인</a>
+            </li>
+            <li class="nav_li">
+                <a class="nav_link" href="/reg">회원가입</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="banner">
+    <!--   <h1>검색이나 메인 문구 ?</h1>-->
+</div>
+<div class="mytitle">
+    <div class="bodyClass">
+        <div class="logBox">
+            <div class="h3text">
+                <h3>로그인</h3>
+            </div>
+            <div class="left"></div>
+            <p>
+            <div class="input-group mb-3">
+                <span class="input-group-text">ID</span>
+                <input type="text" id="id" class="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">PW</span>
+                <input type="password" id="pw" class="form-control" aria-label="Sizing example input"
+                       aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="right"></div>
+            </p>
+        </div>
+        <div class="buttons">
+            <a href="/reg">
+                <button type="button" class="btn2">회원가입</button>
+            </a>
+            <button type="button" class="btn" onclick="login()">로그인</button>
+        </div>
     </div>
-</div>
-<div class="footer">
-</div>
+    <div class="footer">
+    </div>
 </body>
 </html>

@@ -18,34 +18,65 @@
 
     <title> 리뷰작성 | 빵수다 </title>
     <style>
+
         .mypost {
             width: 95%;
             max-width: 500px;
             margin: 20px auto 0px auto;
             padding: 20px;
             box-shadow: 0px 0px 3px 0px gray;
+
         }
+
         .h1 {
             text-align: center;
             color: #534340;
         }
+
         .citySelect {
             width: 380px;
             height: 100%;
         }
+
         .size {
             width: 80px;
             text-align: center;
         }
+
         .input-group-text {
             width: 95%;
             text-align: center;
         }
+
         .mybtns {
+            align-content: center;
             width: 95%;
             max-width: 500px;
             padding: 20px;
             margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn {
+            width: 80px;
+            height: 30px;
+            border: 0px;
+            background-color: #AD8B73;
+            outline: none;
+            float: right;
+            color: #FFFBE9;
+            margin-left: 5px;
+        }
+        .btn2 {
+            width: 80px;
+            height: 100%;
+            background-color: #FFFBE9;
+            outline: none;
+            float: right;
+            color: #AD8B73;
+            border: #AD8B73 solid 1px;
+            border-radius: 5px;
         }
     </style>
     <script>
@@ -112,8 +143,8 @@
     <div id="bakeryName" class="input-group input-group-sm mb-3">
         <div class="size">
             <div class="input-group-prepend">
-            <span class="input-group-text">빵집이름</span>
-        </div>
+                <span class="input-group-text">빵집이름</span>
+            </div>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="store">
     </div>
@@ -124,8 +155,8 @@
 
         <div class="size">
             <div class="input-group-prepend">
-            <span class="input-group-text">지역</span>
-        </div>
+                <span class="input-group-text">지역</span>
+            </div>
         </div>
 
         <select class="citySelect" id="city">
@@ -144,20 +175,20 @@
 
     <!--세부주소-->
     <div class="input-group input-group-sm mb-3">
-          <div class="size">
+        <div class="size">
             <div class="input-group-prepend">
-            <span class="input-group-text">세부주소</span>
-        </div>
+                <span class="input-group-text">세부주소</span>
+            </div>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="city2">
     </div>
 
     <!--추천 빵-->
     <div class="input-group input-group-sm mb-3">
-         <div class="size">
+        <div class="size">
             <div class="input-group-prepend">
-            <span class="input-group-text">추천빵</span>
-        </div>
+                <span class="input-group-text">추천빵</span>
+            </div>
         </div>
         <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                id="bread_name"></div>
@@ -166,8 +197,8 @@
     <div class="input-group">
         <div class="size">
             <div class="input-group-prepend">
-            <span class="input-group-text">코멘트</span>
-        </div>
+                <span class="input-group-text">코멘트</span>
+            </div>
         </div>
         <textarea class="form-control" aria-label="With textarea" id="comment"></textarea>
     </div>
@@ -191,13 +222,12 @@
         <input type="file" class="custom-file-input" id="file">
         <label class="custom-file-label" for="file">Choose file</label>
     </div>
-
+    <!--버튼-->
+    <div class="mybtns">
+        <button onclick="close_box()" type="button" class="btn2">Cancel</button>
+        <button onclick="save_review()" type="button" class="btn">Submit</button>
+    </div>
 </div>
-</div>
-<!--버튼-->
-<div class="mybtns">
-    <button onclick="close_box()" type="button" class="btn btn-outline-dark">Cancel</button>
-    <button onclick="save_review()" type="button" class="btn btn-primary">Submit</button>
 </div>
 
 
