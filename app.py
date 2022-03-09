@@ -116,14 +116,11 @@ def save_review():
 
     return jsonify({'msg': '등록 완료!!'})
 
-
 # 리뷰 데이터 전달
 @app.route("/api/read", methods=["GET"])
 def review_get():
     review_list = list(db.review.find({}, {'_id': False}))
     return jsonify({'reviews': review_list})
-
-
 
 # 로그인 정보를 메인페이지로 전달
 @app.route('/')

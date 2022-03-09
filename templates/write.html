@@ -90,14 +90,14 @@
 
             $.ajax({
                 type: "POST",
-                url: "/api/writing",
+                url: "/writing/save",
                 data: form_data,
                 cache: false,
                 contentType: false,
                 processData: false,
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.reload()
+                    window.location.replace("/")
                 }
             });
         }
@@ -111,7 +111,7 @@
     </div>
     <nav>
         <div>
-            <button onclick="location.href='/writing'" class="btn-rvw headers">리뷰작성</button>
+            <button class="btn-rvw headers" onclick="location.href='/writing'">리뷰작성</button>
             <button class='btn-login' onclick="location.href='/login'" class="headers">로그인</button>
             <button class="btn-mypg" onclick="location.href='/reg'">회원가입</button>
         </div>
