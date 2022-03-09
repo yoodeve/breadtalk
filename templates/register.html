@@ -31,12 +31,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+<<<<<<< HEAD
+            padding-top;: 150 px;
+=======
             padding-top: 150px;
 
             background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/breadRegister.jpg');
             background-position: center;
             background-size: cover;
             color: #F6E7D8;
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
         }
 
         .h3text {
@@ -78,7 +82,11 @@
         .input-group > label {
             border: 1px solid black;
             border-radius: 5px;
+<<<<<<< HEAD
+            width: 90px;
+=======
             width: 100px;
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
             height: 100%;
             margin-right: 1px;
             text-align: center;
@@ -103,6 +111,8 @@
             font-size: 12px;
             font-palette: light;
         }
+<<<<<<< HEAD
+=======
         .btn {
             width: 90px;
             height: 40px;
@@ -135,11 +145,7 @@
             border: #AD8B73 solid 1px;
             border-radius: 5px;
         }
-        .headers {
-            background-color: transparent;
-            border: transparent;
-            font-size: 18px;
-        }
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
     </style>
 
     <script>
@@ -287,11 +293,23 @@
     <div class="nav_link" onclick="window.location.href = '/'">
         <img src="static/mylogo.png" alt="">
     </div>
-         <div>
-            <button  class="headers" onclick="location.href='api/writing'">리뷰작성</button>
-            <button  class="headers" onclick="location.href='/login'">로그인</button>
-            <button  class="headers" onclick="location.href='/reg'">회원가입</button>
-        </div>
+    <nav>
+        <ul class="nav_ul">
+            <li class="nav_li">
+<<<<<<< HEAD
+                <a class="nav_link" href="/writing">리뷰작성</a>
+=======
+                <a class="nav_link" href="/api/writing">리뷰작성</a>
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
+            </li>
+            <li class="nav_li">
+                <a class="nav_link" href="/login">로그인</a>
+            </li>
+            <li class="nav_li">
+                <a class="nav_link" href="/reg">회원가입</a>
+            </li>
+        </ul>
+    </nav>
 </header>
 
 <div class="bodyClass">
@@ -303,13 +321,21 @@
         <div class="input-group">
             <label>ID</label>
             <input type="text" class="form-control" id="id" aria-label="Recipient's username with two button addons">
+<<<<<<< HEAD
+            <button class="btn btn-outline-secondary" type="button" id="idcheck" onclick="check_iddup()">중복확인</button>
+=======
             <button class="btn3" type="button" id="idcheck" onclick="check_iddup()">중복확인</button>
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
         </div>
         <div><p class="idhelper" id="idhelper">아이디를 입력해주세요.(영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이)</p></div>
         <div class="input-group">
             <label>닉네임</label>
             <input type="text" class="form-control" id="nick" aria-label="Recipient's username with two button addons">
+<<<<<<< HEAD
+            <button class="btn btn-outline-secondary" type="button" id="nickcheck" onclick="check_nickdup()">중복확인
+=======
             <button class="btn3" type="button" id="nickcheck" onclick="check_nickdup()">중복확인
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
             </button>
         </div>
         <div><p class="nickhelper" id="nickhelper"> 닉네임을 입력해주세요.</p></div>
@@ -326,6 +352,15 @@
         </div>
         <div><p class="twicehelper" id="twicehelper">비밀번호를 한번 더 입력해주세요.</p></div>
         </p>
+<<<<<<< HEAD
+    </div>
+    <div class="buttons">
+        <a href="index.html">
+            <button type="button" class="btn btn-outline-secondary">취소</button>
+        </a>
+        <button type="button" class="btn btn-outline-success" onclick="join()">회원가입</button>
+    </div>
+=======
         <div class="buttons">
         <a href="/">
             <button type="button" class="btn2">취소</button>
@@ -334,6 +369,7 @@
     </div>
     </div>
 
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
 </div>
 <div class="footer">
 </div>
