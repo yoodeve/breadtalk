@@ -108,6 +108,18 @@
             border: #AD8B73 solid 1px;
             border-radius: 5px;
         }
+        .headers {
+            background-color: transparent;
+            border: transparent;
+        }
+        .btn-login{
+            background-color: transparent;
+            border: transparent;
+        }
+        .btn-mypg {
+            background-color: transparent;
+            border: transparent;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -205,9 +217,9 @@
     </div>
     <nav>
         <div>
-            <button onclick="location.href='api/writing'">리뷰작성</button>
-            <button class='btn-login' onclick="location.href='/login'">로그인</button>
-            <button class='btn-mypg' onclick="location.href='/reg'">회원가입</button>
+            <button onclick="location.href='api/writing'" class="headers">리뷰작성</button>
+            <button class='btn-login' onclick="location.href='/login'" class="headers">로그인</button>
+            <button class="btn-mypg" onclick="location.href='/reg'">회원가입</button>
         </div>
 <!--        <ul class="nav_ul">-->
 <!--            <li class="nav_li">-->

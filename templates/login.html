@@ -98,6 +98,11 @@
             border: #AD8B73 solid 1px;
             border-radius: 5px;
         }
+        .headers {
+            background-color: transparent;
+            border: transparent;
+            font-size: 18px;
+        }
     </style>
     <script>
         function login() {
@@ -139,19 +144,11 @@
     <div class="nav_link" onclick="window.location.href = '/'">
         <img src="static/mylogo.png" alt="">
     </div>
-    <nav>
-        <ul class="nav_ul">
-            <li class="nav_li">
-                <a class="nav_link" href="/api/writing">리뷰작성</a>
-            </li>
-            <li class="nav_li">
-                <a class="nav_link" href="/login">로그인</a>
-            </li>
-            <li class="nav_li">
-                <a class="nav_link" href="/reg">회원가입</a>
-            </li>
-        </ul>
-    </nav>
+        <div>
+            <button  class="headers" onclick="location.href='api/writing'">리뷰작성</button>
+            <button  class="headers" onclick="location.href='/login'">로그인</button>
+            <button  class="headers" onclick="location.href='/reg'">회원가입</button>
+        </div>
 </header>
 <div class="banner">
     <!--   <h1>검색이나 메인 문구 ?</h1>-->
