@@ -21,6 +21,10 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+@app.route('/writing')
+def write():
+    return render_template('write.html')
+
 @app.route('/login/success', methods=["POST"])
 def signin():
     # 로그인
@@ -72,10 +76,6 @@ def join():
     }
     db.busers.insert_one(doc)
     return jsonify({'result': 'success'})
-
-@app.route('/api/writing')
-def write():
-    return render_template('write.html')
 
 @app.route("/api/writing", methods=["POST"])
 def save_review():

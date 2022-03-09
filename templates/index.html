@@ -1,24 +1,7 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html"  %}
+{% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Style 관련 -->
-    <link href='{{ url_for("static", filename="mystyle.css") }}' rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-
-    <!-- Script 관련 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-
-    <title>빵수다</title>
-
-    <style>
+<style>
         * {
             color:#534340;
         }
@@ -53,15 +36,6 @@
             flex-wrap: wrap;
         }
 
-        /*.mypost {*/
-        /*    width: 95%;*/
-        /*    max-width: 500px;*/
-        /*    margin: 20px auto 0px auto;*/
-        /*    padding: 20px;*/
-        /*    box-shadow: 0px 0px 3px 0px gray;*/
-
-        /*    display: none;*/
-        /*}*/
 
         .select_box {
             margin-bottom: 20px;
@@ -108,106 +82,8 @@
             border: #AD8B73 solid 1px;
             border-radius: 5px;
         }
-        .headers {
-            background-color: transparent;
-            border: transparent;
-        }
-        .btn-login{
-            background-color: transparent;
-            border: transparent;
-        }
-        .btn-mypg {
-            background-color: transparent;
-            border: transparent;
-        }
+
     </style>
-    <script>
-        $(document).ready(function () {
-             checkCookie();
-        });
-
-        function checkCookie() {
-            let cookieArr = document.cookie.split(";");
-            try {
-                for (let i = 0; i < cookieArr.length; i++) {
-                    let logIn = cookieArr[i].match('mytoken')
-
-                    if (logIn) { // 로그인 상태 //
-                        alert("로그인 상태입니다")
-                        let loginBtn = document.querySelector(".btn-login")
-                        loginBtn.innerHTML = "LOGOUT";
-                        loginBtn.addEventListener("click", logOut);
-
-                        let mypgBtn = document.querySelector(".btn-mypg")
-                        mypgBtn.innerHTML = "MyPage";
-                        mypgBtn.addEventListener("click", MyPage);
-
-                    } else {
-                        return;
-                    }
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        }
-
-        function logOut() {
-            document.cookie = "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            window.location.href = "/"
-        }
-
-        function MyPage() {
-            window.location.href = "/reg"
-        }
-
-        // $(document).ready(function () {
-        //     listing();
-        // });
-
-
-
-        // 좋아요 업데이트 함수
-
-        // function toggle_like(post_id, type) {
-        //     console.log(post_id, type)
-        //     let $a_like = $(`#${post_id} a[aria-label='heart']`)
-        //     let $i_like = $a_like.find("i")
-        //     if ($i_like.hasClass("fa-heart")) {
-        //         $.ajax({
-        //             type: "POST",
-        //             url: "/update_like",
-        //             data: {
-        //                 post_id_give: post_id,
-        //                 type_give: type,
-        //                 action_give: "unlike"
-        //             },
-        //             success: function (response) {
-        //                 console.log("unlike")
-        //                 $i_like.addClass("fa-heart-o").removeClass("fa-heart")
-        //                 $a_like.find("span.like-num").text(response["count"])
-        //             }
-        //         })
-        //     } else {
-        //         $.ajax({
-        //             type: "POST",
-        //             url: "/update_like",
-        //             data: {
-        //                 post_id_give: post_id,
-        //                 type_give: type,
-        //                 action_give: "like"
-        //             },
-        //             success: function (response) {
-        //                 console.log("like")
-        //                 $i_like.addClass("fa-heart").removeClass("fa-heart-o")
-        //                 $a_like.find("span.like-num").text(response["count"])
-        //             }
-        //         })
-        //
-        //     }
-        // }
-
-    </script>
-</head>
 
 <body>
 <!--네비게이션 바-->
@@ -217,29 +93,17 @@
     </div>
     <nav>
         <div>
-            <button onclick="location.href='api/writing'" class="headers">리뷰작성</button>
-            <button class='btn-login' onclick="location.href='/login'" class="headers">로그인</button>
+            <button onclick="location.href='/writing'" class="headers">리뷰작성</button>
+            <button class='btn-login headers' onclick="location.href='/login'">로그인</button>
             <button class="btn-mypg" onclick="location.href='/reg'">회원가입</button>
         </div>
-<!--        <ul class="nav_ul">-->
-<!--            <li class="nav_li">-->
-<!--                <a class="nav_link" href="/api/writing">리뷰작성</a>-->
-<!--            </li>-->
-<!--            <li class="nav_li">-->
-<!--                <a id="btn-join" class="nav_link" href="/login">로그인</a>-->
-<!--            </li>-->
-<!--            <li class="nav_li">-->
-<!--                <a class="nav_link" href="/reg">회원가입</a>-->
-<!--            </li>-->
-<!--        </ul>-->
     </nav>
 </header>
 
-<div class="mytitle">
-    <!--   <h1>검색이나 메인 문구 ?</h1>-->
-</div>
+<!-- 빵 사진 -->
+<div class="mytitle"></div>
 
-
+<!-- 카드 박스 -->
 <div class="mycards">
     <div class="select">
         <div class="select_box">
@@ -355,6 +219,5 @@
     </div>
 
 </div>
-</body>
 
-</html>
+{% endblock %}

@@ -36,3 +36,18 @@
     margin-left: 20px;
     margin-bottom: 5px;
 }
+
+.headers {
+    background-color: transparent;
+    border: transparent;
+}
+
+.btn-login {
+    background-color: transparent;
+    border: transparent;
+}
+
+.btn-mypg {
+    background-color: transparent;
+    border: transparent;
+}
