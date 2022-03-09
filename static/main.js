@@ -10,7 +10,6 @@ function checkCookie() {
             let logIn = cookieArr[i].match('mytoken')
 
             if (logIn) { // 로그인 상태 //
-                alert("로그인 상태입니다")
                 let loginBtn = document.querySelector(".btn-login");
                 loginBtn.innerHTML = "LOGOUT";
                 loginBtn.addEventListener("click", logOut);
