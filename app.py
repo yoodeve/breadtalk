@@ -35,7 +35,7 @@ def signin():
             'id': id_receive,
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
@@ -147,4 +147,4 @@ def mypage():
     return render_template('mypage.html', nick=nick, reviews=reviews)
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5050, debug=True)
+    app.run('0.0.0.0', port=5000, debug=True)
