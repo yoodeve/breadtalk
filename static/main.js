@@ -10,15 +10,16 @@ function checkCookie() {
 
             if (logIn) { // 로그인 상태 //
                 alert("로그인 상태입니다")
-                let loginBtn = document.querySelector(".btn-login")
+                let loginBtn = document.querySelector(".btn-login");
                 loginBtn.innerHTML = "LOGOUT";
                 loginBtn.addEventListener("click", logOut);
 
-                let mypgBtn = document.querySelector(".btn-mypg")
+                let mypgBtn = document.querySelector(".btn-mypg");
                 mypgBtn.innerHTML = "MyPage";
                 mypgBtn.addEventListener("click", MyPage);
 
             } else {
+                let loginBtn = document.querySelector(".btn-rvw").style.visibility = "hidden";
                 return;
             }
         }
