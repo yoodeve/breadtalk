@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Style 관련 -->
+    <link href='{{ url_for("static", filename="mystyle.css") }}' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- Script 관련 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title> 리뷰작성 | 빵수다 </title>
+    <style>
+
+        .mypost {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px gray;
+
+        }
+
+        .h1 {
+            text-align: center;
+            color: #534340;
+        }
+
+        .citySelect {
+            width: 380px;
+            height: 100%;
+        }
+
+        .size {
+            width: 80px;
+            text-align: center;
+        }
+
+        .input-group-text {
+            width: 95%;
+            text-align: center;
+        }
+
+        .mybtns {
+            align-content: center;
+            width: 95%;
+            max-width: 500px;
+            padding: 20px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn {
+            width: 80px;
+            height: 30px;
+            border: 0px;
+            background-color: #AD8B73;
+            outline: none;
+            float: right;
+            color: #FFFBE9;
+            margin-left: 5px;
+        }
+        .btn2 {
+            width: 80px;
+            height: 100%;
+            background-color: #FFFBE9;
+            outline: none;
+            float: right;
+            color: #AD8B73;
+            border: #AD8B73 solid 1px;
+            border-radius: 5px;
+        }
+        .headers {
+            background-color: transparent;
+            border: transparent;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function save_review() {
+            let store = $('#store').val();
+            let city = $('#city').val();
+            let city2 = $('#city2').val();
+            let bread_name = $('#bread_name').val();
+            let comment = $('#comment').val();
+            let star = $('#star').val();
+
+
+            let file = $('#file')[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("store_give", store)
+            form_data.append("city_give", city)
+            form_data.append("city2_give", city2)
+            form_data.append("bread_name_give", bread_name)
+            form_data.append("comment_give", comment)
+            form_data.append("star_give", star)
+
+            $.ajax({
+                type: "POST",
+                url: "/api/writing",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+<header class="nav">
+    <div class="nav_link" onclick="window.location.href = '/'">
+        <img src="../static/mylogo.png" alt="">
+    </div>
+    <nav>
+        <div>
+            <button class="headers" onclick="location.href='api/writing'">리뷰작성</button>
+            <button class="headers" onclick="location.href='/login'">로그인</button>
+            <button class="headers" onclick="location.href='/reg'">회원가입</button>
+        </div>
+    </nav>
+</header>
+<div class="mypost" id="post-box">
+    <p>
+    <h1 class="h1">Review</h1>
+    </p>
+    <!--빵집이름-->
+    <div id="bakeryName" class="input-group input-group-sm mb-3">
+        <div class="size">
+            <div class="input-group-prepend">
+                <span class="input-group-text">빵집이름</span>
+            </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="store">
+    </div>
+
+    <!--지역선택-->
+
+    <div class="btn-group">
+
+        <div class="size">
+            <div class="input-group-prepend">
+                <span class="input-group-text">지역</span>
+            </div>
+        </div>
+
+        <select class="citySelect" id="city">
+            <option value="서울">서울</option>
+            <option value="경기도">경기</option>
+            <option value="강원도">강원</option>
+            <option value="대전">대전</option>
+            <option value="세종">세종</option>
+            <option value="광주">광주</option>
+            <option value="목포">목포</option>
+            <option value="부산">부산</option>
+            <option value="대구">대구</option>
+            <option value="대구">울산</option>
+        </select>
+    </div>
+
+    <!--세부주소-->
+    <div class="input-group input-group-sm mb-3">
+        <div class="size">
+            <div class="input-group-prepend">
+                <span class="input-group-text">세부주소</span>
+            </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="city2">
+    </div>
+
+    <!--추천 빵-->
+    <div class="input-group input-group-sm mb-3">
+        <div class="size">
+            <div class="input-group-prepend">
+                <span class="input-group-text">추천빵</span>
+            </div>
+        </div>
+        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+               id="bread_name"></div>
+
+    <!--코멘드-->
+    <div class="input-group">
+        <div class="size">
+            <div class="input-group-prepend">
+                <span class="input-group-text">코멘트</span>
+            </div>
+        </div>
+        <textarea class="form-control" aria-label="With textarea" id="comment"></textarea>
+    </div>
+    </br>
+
+    <!-- 빵집별점  -->
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="star">빵집별점</label>
+        <select class="form-select" id="star">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+
+    <!--사진 업로드 -->
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="file">
+        <label class="custom-file-label" for="file">Choose file</label>
+    </div>
+    <!--버튼-->
+    <div class="mybtns">
+        <button onclick="close_box()" type="button" class="btn2">Cancel</button>
+        <button onclick="save_review()" type="button" class="btn">Submit</button>
+    </div>
+</div>
+</div>
+
+
+</div>
+</body>
+</html>

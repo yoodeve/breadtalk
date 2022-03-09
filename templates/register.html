@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title> 빵수다 | 회원가입 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Style 관련 -->
+    <link href='{{ url_for("static", filename="mystyle.css") }}' rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- Script 관련 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+
+    <title> 회원가입 | 빵수다 </title>
 
     <style>
         .header {
@@ -23,7 +31,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding-top;: 150 px;
+            padding-top: 150px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/breadRegister.jpg');
+            background-position: center;
+            background-size: cover;
+            color: #F6E7D8;
         }
 
         .h3text {
@@ -65,7 +78,7 @@
         .input-group > label {
             border: 1px solid black;
             border-radius: 5px;
-            width: 90px;
+            width: 100px;
             height: 100%;
             margin-right: 1px;
             text-align: center;
@@ -90,6 +103,43 @@
             font-size: 12px;
             font-palette: light;
         }
+        .btn {
+            width: 90px;
+            height: 40px;
+            border: 0px;
+            background-color: #AD8B73;
+            outline: none;
+            float: right;
+            color: #FFFBE9;
+            margin-left: 5px;
+            vertical-align: center;
+        }
+
+        .btn2 {
+            width: 90px;
+            height: 40px;
+            background-color: #FFFBE9;
+            outline: none;
+            float: right;
+            color: #AD8B73;
+            border: #AD8B73 solid 1px;
+            border-radius: 5px;
+        }
+        .btn3 {
+            width: 90px;
+            height: 38px;
+            background-color: #FFFBE9;
+            outline: none;
+            float: right;
+            color: #AD8B73;
+            border: #AD8B73 solid 1px;
+            border-radius: 5px;
+        }
+        .headers {
+            background-color: transparent;
+            border: transparent;
+            font-size: 18px;
+        }
     </style>
 
     <script>
@@ -99,7 +149,7 @@
         }
 
         function is_nick(asValue) {
-            var regExp =  /^[가-힣]{2,4}$/;
+            var regExp = /^[가-힣]{2,4}$/;
             return regExp.test(asValue);
         }
 
@@ -171,71 +221,79 @@
         }
 
         function join() {
-                let id = $("#id").val()
-                let nick = $("#nick").val()
-                let pw1 = $("#pw").val()
-                let pw2 = $("#dupPw").val()
+            let id = $("#id").val()
+            let nick = $("#nick").val()
+            let pw1 = $("#pw").val()
+            let pw2 = $("#dupPw").val()
 
 
-                if ($("#idhelper").hasClass("is-danger")) {
-                    alert("아이디를 다시 확인해주세요.")
-                    return;
-                } else if (!$("#idhelper").hasClass("is-success")) {
-                    alert("아이디 중복확인을 해주세요.")
-                    return;
-                }
-
-                if ($("#nickhelper").hasClass("is-danger")) {
-                    alert("닉네임을 다시 확인해주세요.")
-                    return;
-                } else if (!$("#idhelper").hasClass("is-success")) {
-                    alert("닉네임 중복확인을 해주세요.")
-                    return;
-                }
-
-                if (pw1 == "") {
-                    $("#pwhelper").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
-                    $("#pw").focus()
-                    return;
-                } else if (!is_password(pw1)) {
-                    $("#pwhelper").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
-                    $("#pw").focus()
-                    return
-                } else {
-                    $("#pwhelper").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
-                }
-                if (pw2 == "") {
-                    $("#twicehelper").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
-                    $("#dupPw").focus()
-                    return;
-                } else if (pw2 != pw1) {
-                    $("#twicehelper").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
-                    $("#dupPw").focus()
-                    return;
-                } else {
-                    $("#twicehelper").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "/reg/save",
-                    data: {
-                        id_give: id,
-                        nick_give: nick,
-                        pw_give: pw1
-                    },
-                    success: function (response) {
-                        alert("회원가입을 환영합니다!")
-                        window.location.replace("/login")
-                    }
-                });
-
+            if ($("#idhelper").hasClass("is-danger")) {
+                alert("아이디를 다시 확인해주세요.")
+                return;
+            } else if (!$("#idhelper").hasClass("is-success")) {
+                alert("아이디 중복확인을 해주세요.")
+                return;
             }
+
+            if ($("#nickhelper").hasClass("is-danger")) {
+                alert("닉네임을 다시 확인해주세요.")
+                return;
+            } else if (!$("#idhelper").hasClass("is-success")) {
+                alert("닉네임 중복확인을 해주세요.")
+                return;
+            }
+
+            if (pw1 == "") {
+                $("#pwhelper").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                $("#pw").focus()
+                return;
+            } else if (!is_password(pw1)) {
+                $("#pwhelper").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
+                $("#pw").focus()
+                return
+            } else {
+                $("#pwhelper").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
+            }
+            if (pw2 == "") {
+                $("#twicehelper").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                $("#dupPw").focus()
+                return;
+            } else if (pw2 != pw1) {
+                $("#twicehelper").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+                $("#dupPw").focus()
+                return;
+            } else {
+                $("#twicehelper").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+            }
+            $.ajax({
+                type: "POST",
+                url: "/reg/save",
+                data: {
+                    id_give: id,
+                    nick_give: nick,
+                    pw_give: pw1
+                },
+                success: function (response) {
+                    alert("회원가입을 환영합니다!")
+                    window.location.replace("/login")
+                }
+            });
+
+        }
     </script>
 </head>
 <body>
-<div class="header">
-</div>
-<hr>
+<header class="nav">
+    <div class="nav_link" onclick="window.location.href = '/'">
+        <img src="static/mylogo.png" alt="">
+    </div>
+         <div>
+            <button  class="headers" onclick="location.href='api/writing'">리뷰작성</button>
+            <button  class="headers" onclick="location.href='/login'">로그인</button>
+            <button  class="headers" onclick="location.href='/reg'">회원가입</button>
+        </div>
+</header>
+
 <div class="bodyClass">
     <div class="legBox">
         <div class="h3text">
@@ -245,31 +303,37 @@
         <div class="input-group">
             <label>ID</label>
             <input type="text" class="form-control" id="id" aria-label="Recipient's username with two button addons">
-        <button class="btn btn-outline-secondary" type="button" id="idcheck" onclick="check_iddup()">중복확인</button>
-    </div>
+            <button class="btn3" type="button" id="idcheck" onclick="check_iddup()">중복확인</button>
+        </div>
         <div><p class="idhelper" id="idhelper">아이디를 입력해주세요.(영문과 숫자, 일부 특수문자(._-) 사용 가능. 2-10자 길이)</p></div>
         <div class="input-group">
             <label>닉네임</label>
             <input type="text" class="form-control" id="nick" aria-label="Recipient's username with two button addons">
-            <button class="btn btn-outline-secondary" type="button" id="nickcheck" onclick="check_nickdup()">중복확인</button>
-            </div>
-    <div><p class="nickhelper" id="nickhelper"> 닉네임을 입력해주세요.</p></div>
-    <div class="input-group">
+            <button class="btn3" type="button" id="nickcheck" onclick="check_nickdup()">중복확인
+            </button>
+        </div>
+        <div><p class="nickhelper" id="nickhelper"> 닉네임을 입력해주세요.</p></div>
+        <div class="input-group">
             <label>비밀번호</label>
-            <input type="password" class="form-control" id="pw" aria-label="Recipient's username with two button addons">
+            <input type="password" class="form-control" id="pw"
+                   aria-label="Recipient's username with two button addons">
         </div>
         <div><p class="pwhelper" id="pwhelper">비밀번호를 입력해주세요.(영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자)</p></div>
         <div class="input-group">
             <label>비밀번호 확인</label>
-            <input type="password" class="form-control" id="dupPw" aria-label="Recipient's username with two button addons">
+            <input type="password" class="form-control" id="dupPw"
+                   aria-label="Recipient's username with two button addons">
         </div>
         <div><p class="twicehelper" id="twicehelper">비밀번호를 한번 더 입력해주세요.</p></div>
         </p>
+        <div class="buttons">
+        <a href="/">
+            <button type="button" class="btn2">취소</button>
+        </a>
+        <button type="button" class="btn" onclick="join()">회원가입</button>
     </div>
-    <div class="buttons">
-        <button type="button" class="btn btn-outline-secondary">취소</button>
-        <button type="button" class="btn btn-outline-success" onclick="join()">회원가입</button>
     </div>
+
 </div>
 <div class="footer">
 </div>
