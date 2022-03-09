@@ -1,7 +1,11 @@
 from pymongo import MongoClient
 client = MongoClient('mongodb+srv://gibeks:1234@Cluster0.htlw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 db = client.dbsparta
+<<<<<<< HEAD
 
+=======
+# css수정 커밋
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
 import jwt
 import datetime
 import hashlib
@@ -26,7 +30,10 @@ def signin():
     # 로그인
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
+<<<<<<< HEAD
     print(pw_receive)
+=======
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
 
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
     result = db.busers.find_one({'id': id_receive, 'pw': pw_hash})
@@ -74,6 +81,7 @@ def join():
     db.busers.insert_one(doc)
     return jsonify({'result': 'success'})
 
+<<<<<<< HEAD
 
 
 @app.route('/writing')
@@ -84,6 +92,13 @@ def writing():
 
 # 리뷰작성 저장
 @app.route('/writing/save', methods=["POST"])
+=======
+@app.route('/api/writing')
+def write():
+    return render_template('write.html')
+
+@app.route("/api/writing", methods=["POST"])
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
 def save_review():
     store_receive = request.form['store_give']
     city_receive = request.form['city_give']
@@ -94,6 +109,7 @@ def save_review():
 
     # 파일 업로드 코드
     file = request.files["file_give"]
+<<<<<<< HEAD
     # 확장자 추출
     extension = file.filename.split('.')[-1]
 
@@ -101,6 +117,15 @@ def save_review():
     today = datetime.now()
     mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
     filename = f'file-{mytime}'
+=======
+
+    extension = file.filename.split('.')[-1]
+
+    today = datetime.now()
+    mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+    filename = f'file-{mytime}'
+
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
     save_to = f'static/{filename}.{extension}'
     file.save(save_to)
 
@@ -120,6 +145,7 @@ def save_review():
 
     db.review.insert_one(doc)
 
+<<<<<<< HEAD
     return jsonify({'msg': '리뷰작성 완료!'})
 
 
@@ -130,6 +156,39 @@ def review_get():
     return jsonify({'reviews': review_list})
 
 
+=======
+    return jsonify({'msg': '등록 완료!!'})
+
+
+# 로그인 정보를 메인페이지로 전달
+@app.route('/')
+def home_test():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        busers_info = db.busers.find_one({"id": payload["id"]})
+        reviews = list(db.review.find({}))
+        reviews.reverse()
+        for review in reviews:
+            review["review_id"] = str(review["_id"])
+            print(review)
+
+        return render_template('index.html', busers_info=busers_info, review=review)
+
+    except jwt.ExpiredSignatureError:
+       return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+
+# 마이페이지로 정보전달
+@app.route('/mypage')
+def mypage():
+    token_receive =request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    busers_info = db.busers.find_one({"id": payload["id"]})
+    nick = busers_info['nick']
+
+    reviews = list(db.review.find({"nick":nick}))
+    return render_template('mypage.html', nick=nick, reviews=reviews)
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

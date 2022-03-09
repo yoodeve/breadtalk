@@ -16,18 +16,35 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
+<<<<<<< HEAD
     <title>빵</title>
 
     <style>
+=======
+    <title>빵수다</title>
+
+    <style>
+        * {
+            color:#534340;
+        }
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
         .mytitle {
             width: 100%;
             height: 400px;
 
+<<<<<<< HEAD
             background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://w7.pngwing.com/pngs/311/933/png-transparent-baguette-hot-dog-food-bread-breakfast-hot-dog-food-breakfast-desktop-wallpaper.png');
             background-position: center;
             background-size: cover;
 
             color: white;
+=======
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/breadHeader.jpg');
+            background-position: top;
+            background-size: cover;
+
+            color: #534340;
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
 
             display: flex;
             flex-direction: column;
@@ -84,6 +101,7 @@
             margin: 20px 20px 20px 20px;
         }
 
+<<<<<<< HEAD
     </style>
     <script>
         $(document).ready(function () {
@@ -137,6 +155,72 @@
                                                 }
                                             })
                                         }
+=======
+        .btn {
+            width: 50px;
+            height: 85%;
+            border: 0px;
+            background-color: #AD8B73;
+            outline: none;
+            float: right;
+            color: #FFFBE9;
+            margin-left: 5px;
+        }
+
+        .btn2 {
+            width: 90px;
+            height: 120%;
+            background-color: #FFFBE9;
+            outline: none;
+            float: right;
+            color: #AD8B73;
+            border: #AD8B73 solid 1px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+             checkCookie();
+        });
+
+        function checkCookie() {
+            let cookieArr = document.cookie.split(";");
+            try {
+                for (let i = 0; i < cookieArr.length; i++) {
+                    let logIn = cookieArr[i].match('mytoken')
+
+                    if (logIn) { // 로그인 상태 //
+                        alert("로그인 상태입니다")
+                        let loginBtn = document.querySelector(".btn-login")
+                        loginBtn.innerHTML = "LOGOUT";
+                        loginBtn.addEventListener("click", logOut);
+
+                        let mypgBtn = document.querySelector(".btn-mypg")
+                        mypgBtn.innerHTML = "MyPage";
+                        mypgBtn.addEventListener("click", MyPage);
+
+                    } else {
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        function logOut() {
+            document.cookie = "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "/"
+        }
+
+        function MyPage() {
+            window.location.href = "/reg"
+        }
+
+        // $(document).ready(function () {
+        //     listing();
+        // });
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
 
 
 
@@ -180,7 +264,10 @@
         //     }
         // }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
     </script>
 </head>
 
@@ -191,6 +278,7 @@
         <img src="static/mylogo.png" alt="">
     </div>
     <nav>
+<<<<<<< HEAD
         <ul class="nav_ul">
             <li class="nav_li">
                 <a class="nav_link" href="/writing">리뷰작성</a>
@@ -202,6 +290,24 @@
                 <a class="nav_link" href="/reg">회원가입</a>
             </li>
         </ul>
+=======
+        <div>
+            <button onclick="location.href='api/writing'">리뷰작성</button>
+            <button class='btn-login' onclick="location.href='/login'">로그인</button>
+            <button class='btn-mypg' onclick="location.href='/reg'">회원가입</button>
+        </div>
+<!--        <ul class="nav_ul">-->
+<!--            <li class="nav_li">-->
+<!--                <a class="nav_link" href="/api/writing">리뷰작성</a>-->
+<!--            </li>-->
+<!--            <li class="nav_li">-->
+<!--                <a id="btn-join" class="nav_link" href="/login">로그인</a>-->
+<!--            </li>-->
+<!--            <li class="nav_li">-->
+<!--                <a class="nav_link" href="/reg">회원가입</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
     </nav>
 </header>
 
@@ -222,6 +328,7 @@
         </div>
         <div class="search_box">
             <input type="text" name="keyword" id="keyword" {% if keyword !=None %} value={{keyword}} {% endif %}>
+<<<<<<< HEAD
             <input type="button" value="검색" onclick="search()">
         </div>
     </div>
@@ -243,6 +350,108 @@
 <!--            </div>-->
 <!--        </div>-->
 
+=======
+            <input type="button" class="btn" value="검색" onclick="search()">
+        </div>
+    </div>
+    <div class="mycards">
+        <div class="card" style="width: 18rem;">
+            <img src="static/example.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">빵집 이름</h5>
+                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">대표빵 : 소보로</li>
+                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                <li class="list-group-item">별점 : ⭐⭐⭐</li>
+            </ul>
+            <div class="card-body" style="display: flex; justify-content: space-around;">
+                <h8>작성자 : 닉네임</h8>
+                <h8>2017-12-21 22:11:33</h8>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="static/example.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">빵집 이름</h5>
+                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">대표빵 : 소보로</li>
+                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                <li class="list-group-item">별점 : ⭐⭐⭐</li>
+            </ul>
+            <div class="card-body" style="display: flex; justify-content: space-around;">
+                <h8>작성자 : 닉네임</h8>
+                <h8>2017-12-21 22:11:33</h8>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="static/example.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">빵집 이름</h5>
+                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">대표빵 : 소보로</li>
+                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                <li class="list-group-item">별점 : ⭐⭐⭐</li>
+            </ul>
+            <div class="card-body" style="display: flex; justify-content: space-around;">
+                <h8>작성자 : 닉네임</h8>
+                <h8>2017-12-21 22:11:33</h8>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="static/example.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">빵집 이름</h5>
+                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">대표빵 : 소보로</li>
+                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                <li class="list-group-item">별점 : ⭐⭐⭐</li>
+            </ul>
+            <div class="card-body" style="display: flex; justify-content: space-around;">
+                <h8>작성자 : 닉네임</h8>
+                <h8>2017-12-21 22:11:33</h8>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="static/example.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">빵집 이름</h5>
+                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">대표빵 : 소보로</li>
+                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                <li class="list-group-item">별점 : ⭐⭐⭐</li>
+            </ul>
+            <div class="card-body" style="display: flex; justify-content: space-around;">
+                <h8>작성자 : 닉네임</h8>
+                <h8>2017-12-21 22:11:33</h8>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="static/example.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">빵집 이름</h5>
+                <p class="card-text">이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.이 빵집은 너무나 맛있고, 위생적이다.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">대표빵 : 소보로</li>
+                <li class="list-group-item">가게주소 : 서울특별시 용산구 가좌동</li>
+                <li class="list-group-item">별점 : ⭐⭐⭐</li>
+            </ul>
+            <div class="card-body" style="display: flex; justify-content: space-around;">
+                <h8>작성자 : 닉네임</h8>
+                <h8>2017-12-21 22:11:33</h8>
+            </div>
+        </div>
+>>>>>>> 002e35fe2aed252a8039d9f670c9d8991d2cc9cf
     </div>
 
 </div>
