@@ -51,9 +51,14 @@ def signin():
 
 @app.route('/reg')
 def register():
+    token_receive = request.cookies.get('mytoken')
     msg = request.args.get("msg")
     title = "빵수다 | 회원가입"
-    return render_template('register.html', msg=msg, title=title)
+    user_info = ''
+    if (token_receive is not None):
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"id": payload["id"]})
+    return render_template('register.html', msg=msg, title=title, user_info=user_info)
 
 @app.route('/reg/checkIdDup', methods=["POST"])
 def checkiddup():
