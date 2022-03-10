@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 client = MongoClient('mongodb+srv://gibeks:1234@Cluster0.htlw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 db = client.dbsparta
-# css수정 커밋
+
 import jwt
 import datetime
 import hashlib
@@ -174,4 +174,4 @@ def mypage(id):
     return render_template('mypage.html', nick=nick, reviews=reviews, user_info=users_info)
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=5050, debug=True)

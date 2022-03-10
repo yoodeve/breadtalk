@@ -11,7 +11,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky; z-index: 99;
+    position: sticky;
+    z-index: 99;
     padding-top: 15px;
     top: 0;
     opacity: 0.8;
@@ -30,8 +31,9 @@
     font-size: 18px;
     font-weight: bold;
 }
-.nav_link{
-    text-decoration : none;
+
+.nav_link {
+    text-decoration: none;
     color: black;
     margin-left: 20px;
     margin-bottom: 5px;
@@ -50,4 +52,34 @@
 .btn-mypg {
     background-color: transparent;
     border: transparent;
+}
+
+.cardStar {
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.storeName {
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 3px;
+    text-decoration-style: solid;
+}
+
+.card {
+    border: #534340 solid 2px;
+    box-shadow: 0px 0px 1px 0px #AD8B73;
+}
+
+.cardLeft {
+    text-align: left;
+    list-style: none;
+    box-shadow: 0px 0px 1px 0px #AD8B73;
+}
+
+.cardLast {
+    text-align: center;
 }
