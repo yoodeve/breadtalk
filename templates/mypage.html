@@ -115,11 +115,11 @@
                                                 </div>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">${bread_name}</li>
-                                                    <li class="list-group-item">${city}${city2}</li>
+                                                    <li class="list-group-item">${city}&nbsp$${city2}</li>
                                                     <li class="list-group-item">${star_image}</li>
                                                 </ul>
                                                 <div class="card-body" style="display: flex; justify-content: space-around;">
-                                                    <h8>작성자:{{ user_info.id }}</h8>
+                                                    <h8>작성자:${id}</h8>
                                                     <h8>${mytime1}</h8>
                                                 </div>
                                             </div>`
@@ -131,7 +131,6 @@
             })
         }
 </script>
-
 
 <body>
 <header class="nav">
