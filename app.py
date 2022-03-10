@@ -116,7 +116,8 @@ def save_review():
     extension = file.filename.split('.')[-1]
 
     today = datetime.now()
-    mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+    mytime = today.strftime('%Y-%m-%d-%H-%M-%S') # 파일업로드시각
+    mytime1 = today.strftime('%Y-%m-%d %H:%M')  # 리뷰작성시각
     filename = f'file-{mytime}'
 
     save_to = f'static/{filename}.{extension}'
@@ -134,7 +135,8 @@ def save_review():
         'bread_name': bread_name_receive,
         'comment': comment_receive,
         'star': star_receive,
-        'file': f'{filename}.{extension}'
+        'file': f'{filename}.{extension}',
+        'mytime1': f'{mytime1}'
     }
 
     db.review.insert_one(doc)

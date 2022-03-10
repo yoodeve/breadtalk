@@ -92,25 +92,28 @@
                 data: {},
                 success: function (response) {
                     let rows = response['reviews']
-                    for (let i = 0; i < rows.length; i++) {
-                        let store = rows[i]['store']
-                        let city = rows[i]['city']
-                        let city2 = rows[i]['city2']
-                        let bread_name = rows[i]['bread_name']
-                        let comment = rows[i]['comment']
-                        let star = rows[i]['star']
-                        let file = rows[i]['file']
+                    for (let i = 0; i <  rows.length; i++) {
+                        let id = rows[i]['id']
+                        if ( id == "{{ user_info.id}}")
+                        {
+                            let store = rows[i]['store']
+                            let city = rows[i]['city']
+                            let city2 = rows[i]['city2']
+                            let bread_name = rows[i]['bread_name']
+                            let comment = rows[i]['comment']
+                            let star = rows[i]['star']
+                            let file = rows[i]['file']
 
-                        let star_image = '⭐'.repeat(star)
+                            let star_image = '⭐'.repeat(star)
 
-                        let today = new Date();
-                        let year = today.getFullYear();
-                        let month = ('0' + (today.getMonth() + 1)).slice(-2);
-                        let day = ('0' + today.getDate()).slice(-2);
-                        let dateString = year + '-' + month + '-' + day;
+                            let today = new Date();
+                            let year = today.getFullYear();
+                            let month = ('0' + (today.getMonth() + 1)).slice(-2);
+                            let day = ('0' + today.getDate()).slice(-2);
+                            let dateString = year + '-' + month + '-' + day;
 
-                        console.log(store, city, city2, bread_name, comment, file, star_image)
-                        let temp_html = ` <div class="card" style="width: 18rem;">
+                            console.log(store, city, city2, bread_name, comment, file, star_image)
+                            let temp_html = ` <div class="card" style="width: 18rem;">
                                                 <img src="../static/${file}" class="card-img-top" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title">${store}</h5>
@@ -126,7 +129,9 @@
                                                     <h8>${dateString}</h8>
                                                 </div>
                                             </div>`
-                        $('#cards-box').append(temp_html)
+                            $('#cards-box').append(temp_html)
+                        }
+
                     }
                 }
             })
