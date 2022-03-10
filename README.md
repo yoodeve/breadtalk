@@ -14,6 +14,13 @@
 
 <h2>3. 와이어프레임</h2>
 
+![01_Untitled](https://user-images.githubusercontent.com/96562253/157617766-64401272-d990-486a-bf8b-bd77ce1b224c.jpg)
+![02_Copy of Untitled](https://user-images.githubusercontent.com/96562253/157617775-3fc812eb-f31e-4887-b2a3-61079ef23b17.jpg)
+![03_Untitled 3](https://user-images.githubusercontent.com/96562253/157617777-73ecdbcc-61df-4617-b4b0-7ff6fdba97c6.jpg)
+![04_Untitled 2](https://user-images.githubusercontent.com/96562253/157617780-bfa78527-f773-4c92-a481-ad0a04feb71d.jpg)
+![05_Untitled 4](https://user-images.githubusercontent.com/96562253/157617782-156c9060-d325-4606-85a9-b3cbc8654344.jpg)
+![06_Copy of Untitled](https://user-images.githubusercontent.com/96562253/157617784-4ed6e5ce-2d4c-49da-bbfa-87696ea01d37.jpg)
+![07_Untitled 5](https://user-images.githubusercontent.com/96562253/157617788-909823a4-d708-424a-ad78-539a5bad7671.jpg)
 
 <h2>4. 사용 스택</h2>
 Server: AWS EC2 (Ubuntu 20.04 LTS)
