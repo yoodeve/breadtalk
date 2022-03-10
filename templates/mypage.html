@@ -104,6 +104,7 @@
                             let star = rows[i]['star']
                             let file = rows[i]['file']
                             let mytime1 = rows[i]['mytime1']
+                            let post_num = rows[i]['num']
 
                             let star_image = '⭐'.repeat(star)
 
@@ -122,6 +123,7 @@
                                                     <h8>작성자:${id}</h8>
                                                     <h8>${mytime1}</h8>
                                                 </div>
+                                                <input type="button" class="delete_review" value="삭제" onclick="delete_btn(${post_num})"/>
                                             </div>`
                             $('#cards-box').append(temp_html)
                         }
@@ -130,6 +132,19 @@
                 }
             })
         }
+    function delete_btn(a) {
+                $.ajax({
+                    type: "POST",
+                    url: `/api/delete`,
+                    data: {
+                        num_give : a
+                    },
+                    success: function (response) {
+                        alert(response["msg"])
+                        window.location.reload()
+                    }
+                });
+            }
 </script>
 
 <body>

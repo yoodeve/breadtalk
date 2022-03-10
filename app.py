@@ -15,12 +15,13 @@ SECRET_KEY = 'bread'
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
+    reviews = list(db.review.find({}, {"_id": False}))
     title = "빵수다 | 메인페이지"
     user_info = ''
     if (token_receive is not None) :
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"id": payload["id"]})
-    return render_template('index.html',title=title, user_info=user_info)
+    return render_template('index.html',title=title, user_info=user_info, reviews=reviews)
 
 @app.route('/login')
 def login():
@@ -174,6 +175,13 @@ def mypage(id):
     nick = users_info['nick']
     reviews = list(db.review.find({"nick":nick}))
     return render_template('mypage.html', nick=nick, reviews=reviews, user_info=users_info)
+
+# 마이페이지 포스트 삭제
+@app.route('/api/delete', methods=['POST'])
+def delete_ex():
+    num_receive = int(request.form["num_give"])
+    db.review.delete_one({"num": num_receive})
+    return jsonify({'result': 'success', 'msg': f'삭제 되었습니다'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5050, debug=True)
