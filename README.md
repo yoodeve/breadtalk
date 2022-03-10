@@ -12,6 +12,8 @@
 <h2>2. 시연 영상</h2>
 수다빵 둘러보기
 
+https://www.youtube.com/watch?v=z9fK4lntTDI
+
 <h2>3. 와이어프레임</h2>
 
 ![01_Untitled](https://user-images.githubusercontent.com/96562253/157617766-64401272-d990-486a-bf8b-bd77ce1b224c.jpg)
@@ -23,9 +25,9 @@
 ![07_Untitled 5](https://user-images.githubusercontent.com/96562253/157617788-909823a4-d708-424a-ad78-539a5bad7671.jpg)
 
 <h2>4. 사용 스택</h2>
-Server: AWS EC2 (Ubuntu 20.04 LTS)
-Database: MongoDB
-Framework: Flask (Python)
+Server: AWS EC2 (Ubuntu 20.04 LTS)<br>
+Database: MongoDB<br>
+Framework: Flask (Python)<br>
 HTML5, CSS, Javascript
 
 <h2>5. 핵심기술</h2>
@@ -37,7 +39,9 @@ HTML5, CSS, Javascript
 </ol>
 
 <h2>5. Trouble Shooting</h2>
-git을 다룰 때 pull/commit/push/clone등의 과정에서 충돌이 나고, 그걸 해결하는 과정에서 스파게티코드가 되어버려 그걸 다시 푸는 데에 시간이 많이 소요되었다.
-검색기능 구현 시 
-삭제기능 구현 시
-서버사이드렌더링
+<ol>
+<li>git을 다룰 때 pull/commit/push/clone등의 과정에서 충돌이 나고, 그걸 해결하는 과정에서 스파게티코드가 되어버려 그걸 다시 푸는 데에 시간이 많이 소요되었다.
+<li>검색기능을 구현하려고 시도하던 때에 db에 있는 원하는 값만 필터링하여 화면에 노출시키고 싶었으나, 함수를 정확히 이해하지 못하는 어려움이 있었다.
+<li>삭제기능을 구현할 때에 db에 있는 지정된 데이터를 삭제시키는 로직을 짜는 것이 힘들었다. 
+<li>서버사이드렌더링이라는 개념이 생소하여 받아들이는 데에 있어 어려움을 겪었다.
+</ol>
