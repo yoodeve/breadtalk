@@ -2,10 +2,7 @@
 {% block content %}
 
 <style>
-        * {
-            color:#534340;
-        }
-        .mytitle {
+.mytitle {
             width: 100%;
             height: 400px;
 
@@ -21,9 +18,7 @@
             justify-content: center;
             margin-bottom: 100px;
         }
-
-
-        .mycards {
+.mycards {
             margin: 20px auto 0px auto;
             width: 95%;
             max-width: 1200px;
@@ -82,35 +77,80 @@
             border: #AD8B73 solid 1px;
             border-radius: 5px;
         }
-
-    </style>
+</style>
 <script>
     $(document).ready(function () {
-        listing();
+        listing_my();
     });
     function MyPage() {
         window.location.href = "/mypage/{{ user_info.id }}"
     }
+    function listing_my() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/read',
+                data: {},
+                success: function (response) {
+                    let rows = response['reviews']
+                    for (let i = 0; i < rows.length; i++) {
+                        let store = rows[i]['store']
+                        let city = rows[i]['city']
+                        let city2 = rows[i]['city2']
+                        let bread_name = rows[i]['bread_name']
+                        let comment = rows[i]['comment']
+                        let star = rows[i]['star']
+                        let file = rows[i]['file']
+
+                        let star_image = '⭐'.repeat(star)
+
+                        let today = new Date();
+                        let year = today.getFullYear();
+                        let month = ('0' + (today.getMonth() + 1)).slice(-2);
+                        let day = ('0' + today.getDate()).slice(-2);
+                        let dateString = year + '-' + month + '-' + day;
+
+                        console.log(store, city, city2, bread_name, comment, file, star_image)
+                        let temp_html = ` <div class="card" style="width: 18rem;">
+                                                <img src="../static/${file}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${store}</h5>
+                                                    <p class="card-text">${comment}</p>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">${bread_name}</li>
+                                                    <li class="list-group-item">${city}${city2}</li>
+                                                    <li class="list-group-item">${star_image}</li>
+                                                </ul>
+                                                <div class="card-body" style="display: flex; justify-content: space-around;">
+                                                    <h8>작성자 : 닉네임</h8>
+                                                    <h8>${dateString}</h8>
+                                                </div>
+                                            </div>`
+                        $('#cards-box').append(temp_html)
+                    }
+                }
+            })
+        }
 </script>
 
+
 <body>
-<!--네비게이션 바-->
 <header class="nav">
     <div class="nav_link" onclick="window.location.href = '/'">
-        <img src="static/mylogo.png" alt="">
+        <img src="/static/mylogo.png" alt="">
     </div>
     <nav>
         <div>
             <button onclick="location.href='/writing'" class="btn-rvw headers">리뷰작성</button>
-            <button class='btn-login headers' onclick="location.href='/login'">로그인</button>
+            <button class='btn-login' onclick="location.href='/login'" class="headers">로그인</button>
             <button class="btn-mypg" onclick="location.href='/reg'">회원가입</button>
         </div>
     </nav>
 </header>
-<!-- 빵 사진 -->
+    <!-- 빵 사진 -->
 <div class="mytitle"></div>
 
-<!-- 카드 박스 -->
+    <!-- 카드 박스 -->
 <div class="mycards">
     <div class="select">
         <div class="select_box">
@@ -128,7 +168,6 @@
     </div>
     <div class="mycards" id="cards-box">
     </div>
-
 </div>
 
 {% endblock %}

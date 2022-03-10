@@ -1,6 +1,5 @@
 $(document).ready(function () {
     checkCookie();
-    listing();
 });
 
 function checkCookie() {
@@ -31,10 +30,6 @@ function checkCookie() {
 function logOut() {
     document.cookie = "mytoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.href = "/"
-}
-
-function MyPage() {
-    window.location.href = "/reg"
 }
 
 function listing() {

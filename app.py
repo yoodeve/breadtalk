@@ -14,14 +14,19 @@ SECRET_KEY = 'bread'
 
 @app.route('/')
 def home():
+    token_receive = request.cookies.get('mytoken')
     title = "빵수다 | 메인페이지"
-    return render_template('index.html',title=title)
+    user_info = ''
+    if (token_receive is not None) :
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"id": payload["id"]})
+    return render_template('index.html',title=title, user_info=user_info)
 
 @app.route('/login')
 def login():
-    msg = request.args.get("msg")
     title = "빵수다 | 로그인"
-    return render_template('login.html', msg=msg,title=title)
+    return render_template('login.html',title=title)
+
 
 @app.route('/login/success', methods=["POST"])
 def signin():
@@ -30,7 +35,7 @@ def signin():
     pw_receive = request.form['pw_give']
 
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-    result = db.busers.find_one({'id': id_receive, 'pw': pw_hash})
+    result = db.users.find_one({'id': id_receive, 'pw': pw_hash})
 
     if result is not None:
         payload = {
@@ -53,13 +58,13 @@ def register():
 @app.route('/reg/checkIdDup', methods=["POST"])
 def checkiddup():
     id_receive = request.form['id_give']
-    exists = bool(db.busers.find_one({"id": id_receive}))
+    exists = bool(db.users.find_one({"id": id_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
 @app.route('/reg/checkNickDup', methods=["POST"])
 def checknickdup():
     nick_receive = request.form['nick_give']
-    exists = bool(db.busers.find_one({"nick": nick_receive}))
+    exists = bool(db.users.find_one({"nick": nick_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
 @app.route('/reg/save', methods=['POST'])
@@ -73,16 +78,26 @@ def join():
         "nick": nick_receive,                                       # 닉네임
         "pw": pw_hash,                                              # 비밀번호
     }
-    db.busers.insert_one(doc)
+    db.users.insert_one(doc)
     return jsonify({'result': 'success'})
 
 @app.route('/writing')
 def write():
     title = "빵수다 | 리뷰 작성"
-    return render_template('write.html', title=title)
+    token_receive = request.cookies.get('mytoken')
+    user_info = ''
+    if (token_receive is not None):
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"id": payload["id"]})
+    return render_template('write.html', title=title, user_info=user_info)
 
 @app.route("/writing/save", methods=["POST"])
 def save_review():
+    token_receive = request.cookies.get('mytoken')
+    if (token_receive is not None):
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        id_receive = db.users.find_one({"id": payload["id"]})['id']
+
     store_receive = request.form['store_give']
     city_receive = request.form['city_give']
     city2_receive = request.form['city2_give']
@@ -106,6 +121,7 @@ def save_review():
     count = len(review_list) + 1
 
     doc = {
+        'id' : id_receive,
         'num': count,
         'store': store_receive,
         'city': city_receive,
@@ -132,28 +148,25 @@ def home_test():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        busers_info = db.busers.find_one({"id": payload["id"]})
+        users_info = db.users.find_one({"id": payload["id"]})
         reviews = list(db.review.find({}))
         reviews.reverse()
         for review in reviews:
             review["review_id"] = str(review["_id"])
             print(review)
 
-        return render_template('index.html', busers_info=busers_info, review=review)
+        return render_template('index.html', users_info=users_info, review=review)
 
     except jwt.ExpiredSignatureError:
        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
 
 # 마이페이지로 정보전달
-@app.route('/mypage')
-def mypage():
-    token_receive =request.cookies.get('mytoken')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    busers_info = db.busers.find_one({"id": payload["id"]})
-    nick = busers_info['nick']
-
+@app.route('/mypage/<id>')
+def mypage(id):
+    users_info = db.users.find_one({"id": id})
+    nick = users_info['nick']
     reviews = list(db.review.find({"nick":nick}))
-    return render_template('mypage.html', nick=nick, reviews=reviews)
+    return render_template('mypage.html', nick=nick, reviews=reviews, user_info=users_info)
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
