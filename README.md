@@ -14,7 +14,7 @@
 
 <h2>3. 와이어프레임</h2>
 
-![01_Untitled](https://user-images.githubusercontent.com/96562253/157617766-64401272-d990-486a-bf8b-bd77ce1b224c.jpg width="300" height="440")
+![01_Untitled](https://user-images.githubusercontent.com/96562253/157617766-64401272-d990-486a-bf8b-bd77ce1b224c.jpg)
 ![02_Copy of Untitled](https://user-images.githubusercontent.com/96562253/157617775-3fc812eb-f31e-4887-b2a3-61079ef23b17.jpg)
 ![03_Untitled 3](https://user-images.githubusercontent.com/96562253/157617777-73ecdbcc-61df-4617-b4b0-7ff6fdba97c6.jpg)
 ![04_Untitled 2](https://user-images.githubusercontent.com/96562253/157617780-bfa78527-f773-4c92-a481-ad0a04feb71d.jpg)
