@@ -1,6 +1,8 @@
+from test import address
 from pymongo import MongoClient
-client = MongoClient('mongodb+srv://gibeks:1234@Cluster0.htlw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+client = MongoClient(address)
 db = client.dbsparta
+
 
 import jwt
 import datetime
@@ -184,4 +186,4 @@ def delete_ex():
     return jsonify({'result': 'success', 'msg': f'삭제 되었습니다'})
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5050, debug=True)
+    app.run('0.0.0.0', port=5000, debug=True)

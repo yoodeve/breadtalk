@@ -165,20 +165,6 @@
 
     <!-- 카드 박스 -->
 <div class="mycards">
-    <div class="select">
-        <div class="select_box">
-            <select class="select_box_si" id="inlineFormCustomSelect">
-                <option selected>지역선택</option>
-                <option value="1">서울</option>
-                <option value="2">경기</option>
-                <option value="3">부산</option>
-            </select>
-        </div>
-        <div class="search_box">
-            <input type="text" name="keyword" id="keyword" {% if keyword !=None %} value={{keyword}} {% endif %}>
-            <input type="button" class="btn" value="검색" onclick="search()">
-        </div>
-    </div>
     <div class="mycards" id="cards-box">
     </div>
 </div>
